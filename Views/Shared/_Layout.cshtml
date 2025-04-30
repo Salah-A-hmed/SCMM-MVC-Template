@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] SCMM</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCMM.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body style="padding: 10px; padding-top: .01%;">
+        <div class="navbar bg-base-100 shadow-sm">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
+                    </div>
+                    <ul tabindex="0"
+                        class="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-64 p-4 shadow">
+                        <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Homepage</a></li>
+                        <li><a asp-controller="Courses" asp-action="Index"><i class="fas fa-book"></i> Courses</a></li>
+                        <li><a asp-controller="Schedule" asp-action="Index"><i class="fas fa-table"></i> Tables</a></li>
+                        <li><a ><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                        <li><a><i class="fas fa-tasks"></i> Assignment</a></li>
+                        <li><a asp-controller="Exams" asp-action="Index"><i class="fas fa-file-alt"></i> Exams</a></li>
+                        <li><a asp-controller="Library" asp-action="Index"><i class="fas fa-book-reader"></i> Library</a></li>
+                        <li><a asp-controller="Activities" asp-action="Index"><i class="fas fa-running"></i> Activities</a></li>
+                        <li><a asp-controller="Events" asp-action="Index"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                        <li><a asp-controller="Complaints" asp-action="Index"><i class="fas fa-comment-dots"></i> Complaints</a></li>
+
+                        <li><a><i class="fas fa-user-plus"></i> Register</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <div class="flex-1">
+                    <img src="https://i.imgur.com/vhEak3B.png" alt="DaisyUI logo" class="w-10 h-10" />
+
+                </div>
+
+                <a class="btn btn-ghost text-xl">SCMS</a>
+
+                <!-- put any extra links you need here ex: <a class="link link-hover">extra link</a> -->
+
+            </div>
+
+            <div class="navbar-end">
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Tailwind CSS Navbar component"
+                                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-58 p-3 shadow">
+                        <li><a><i class="fas fa-sign-in-alt"></i> login</a></li>
+                        <li><a><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - SCMM 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

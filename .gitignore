@@ -1,0 +1,14 @@
+# Ignore Visual Studio folders and temp files
+.vs/
+*.user
+*.suo
+
+# Build results
+bin/
+obj/
+
+# Logs
+*.log
+
+# Others
+*.DS_Store
