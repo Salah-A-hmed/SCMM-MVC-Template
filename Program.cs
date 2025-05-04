@@ -1,6 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddScoped(typeof(IBasicRepo<>), typeof(BasicRepo<>));
+builder.Services.AddScoped<IEventRepo, EventRepo>();
+builder.Services.AddScoped<IEventBookingRepo, EventBookingRepo>();
+builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
