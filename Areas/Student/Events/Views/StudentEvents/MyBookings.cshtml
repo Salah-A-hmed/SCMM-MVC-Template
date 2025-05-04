@@ -1,0 +1,43 @@
+<!-- Views/StudentEvents/MyBookings.cshtml -->
+@model IEnumerable<SCMS.Models.Event>
+
+@{
+    ViewData["Title"] = "My Booked Events";
+}
+
+<h1>My Booked Events</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+<div class="container my-20 mx-auto">
+    <main>
+        <div class="flex flex-row justify-between items-baseline mb-5">
+            <h2 class="text-3xl font-semibold text-capitalize">Booked Events</h2>
+            <a href="../Events/events.html" class="btn btn-primary text-capitalize">View Events</a>
+        </div>
+        <div class="cards join grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-5">
+            @foreach (var element in Model)
+            {
+                <div class="card join-item bg-base-100 w-96 rounded-lg shadow-sm hover:shadow-lg">
+                    <div class="card-body bg-gray-100">
+                        <h4 class="card-title">@element.Title</h4>
+                        <p class="text-primary">@element.StartDate</p>
+                        <p class="text-primary">@element.Location</p>
+                        <div class="card-actions justify-start">
+                            <button class="btn btn-primary text-capitalize" asp-action="Cancel" asp-route-id=@ViewData["Id"]>Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
+</div>
+
