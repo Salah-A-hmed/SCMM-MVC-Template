@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@* @model List<SCMM.Models.SupportTicket>
 @{
-}
+    ViewData["Title"] = "Student Dashboard";
+} *@
+
+<h1 class="text-4xl font-bold mb-2">Welcome to the Support Center!</h1>
+@* <p class="text-lg mb-6">You have @Model.Count active complaints.</p> *@
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- New Complaint -->
+    <a asp-action="NewComplaint" class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition cursor-pointer">
+        <div class="card-body">
+            <div class="text-3xl">➕</div>
+            <h2 class="card-title">New Complaint</h2>
+            <p>Report an issue or request help.</p>
+        </div>
+    </a>
+
+    <!-- Complaints History -->
+    <a asp-action="History" class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition cursor-pointer">
+        <div class="card-body">
+            <div class="text-3xl">🕒</div>
+            <h2 class="card-title">Complaints History</h2>
+            <p>View your submitted complaints.</p>
+        </div>
+    </a>
+
+    <!-- Frequent Questions -->
+    <a asp-action="FAQ" class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition cursor-pointer">
+        <div class="card-body">
+            <div class="text-3xl">❓</div>
+            <h2 class="card-title">Frequent Questions</h2>
+            <p>Find quick answers to common questions.</p>
+        </div>
+    </a>
+</div>

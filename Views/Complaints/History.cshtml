@@ -1,0 +1,52 @@
+﻿@model List<SCMM.Models.SupportTicket>
+@{
+    ViewData["Title"] = "Complaints History";
+}
+
+<div class="p-8 max-w-4xl mx-auto">
+    <h1 class="text-lg font-semibold text-gray-500 mb-6">Complaints history</h1>
+
+    <div class="space-y-4">
+        @foreach (var complaint in Model)
+        {
+            <div class="bg-gray-100 border border-gray-300 rounded-xl flex justify-between items-center p-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-purple-100 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">
+                        @(complaint.Title?[0] ?? '?') 
+                    </div>
+                    <span class="font-medium text-gray-800">
+                        @(complaint.Title ?? "No Title")
+                    </span>
+
+                    <!-- Display Status -->
+                    <span class="@GetStatusClass(complaint.Status)">
+                        @complaint.Status.ToString()
+                    </span>
+                </div>
+                <div>
+                    @if (string.IsNullOrEmpty(complaint.Answer))
+                    {
+                        <a asp-action="EditComplaint" asp-route-id="@complaint.Id" class="btn btn-sm bg-black text-white px-6 rounded-full hover:bg-gray-800">Edit</a>
+                    }
+                    else
+                    {
+                        <a asp-action="SeeAnswer" asp-route-id="@complaint.Id" class="btn btn-sm btn-success text-white px-6 rounded-full">See Answer</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    // Helper method to style status badges
+    string GetStatusClass(SCMM.Data.Complaints_status status)
+    {
+        return status switch
+        {
+            SCMM.Data.Complaints_status.Pending => "bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs",
+            SCMM.Data.Complaints_status.Answered => "bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs",
+            _ => "bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs"
+        };
+    }
+}

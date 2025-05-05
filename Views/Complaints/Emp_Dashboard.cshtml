@@ -1,0 +1,21 @@
+﻿@model List<SCMM.Models.SupportTicket>
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<div class="max-w-4xl mx-auto p-8 space-y-6">
+    <h1 class="text-2xl font-bold mb-6">Unanswered Complaints</h1>
+
+    @foreach (var complaint in Model.Where(c => string.IsNullOrEmpty(c.Answer)))
+    {
+        <div class="bg-gray-100 border border-gray-300 rounded-xl flex justify-between items-center p-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-purple-100 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">
+                    @complaint.Title[0]
+                </div>
+                <span class="text-base font-medium">@complaint.Title</span>
+            </div>
+            <a asp-action="SetAnswer" asp-route-id="@complaint.Id" class="btn btn-sm bg-black text-white px-6 rounded-full hover:bg-gray-800">View</a>
+        </div>
+    }
+</div>

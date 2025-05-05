@@ -1,0 +1,44 @@
+﻿@model SCMM.Models.SupportTicket
+@{
+    ViewData["Title"] = "Complaint Answer";
+}
+
+<div class="max-w-6xl mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Complaint Content -->
+    <div class="border p-6 rounded-xl shadow-sm bg-base-100">
+        <h2 class="text-xl font-semibold mb-4">Your Complaint Content</h2>
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text">Title</span>
+            </label>
+            <input type="text" class="input input-bordered" value="@Model.Title" disabled />
+        </div>
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text">Category</span>
+            </label>
+            <input type="text" class="input input-bordered" value="@Model.Category" disabled />
+        </div>
+        <div class="form-control">
+            <label class="label">
+                <span class="label-text">Description</span>
+            </label>
+            <textarea class="textarea textarea-bordered h-32" disabled>@Model.Content</textarea>
+        </div>
+    </div>
+
+    <!-- The Answer -->
+    <div class="border p-6 rounded-xl shadow-sm bg-base-100">
+        <h2 class="text-xl font-semibold mb-4">The Answer</h2>
+        @if (string.IsNullOrEmpty(Model.Answer))
+        {
+            <div class="alert alert-warning">
+                No answer has been provided yet for this complaint.
+            </div>
+        }
+        else
+        {
+            <textarea class="textarea textarea-bordered w-full h-64" disabled>@Model.Answer</textarea>
+        }
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model SCMM.Models.SupportTicket
+@{
+    ViewData["Title"] = "Edit Complaint";
+}
+
+<div class="p-8 max-w-3xl mx-auto">
+    <div class="card bg-base-100 border border-base-200 shadow-sm">
+        <div class="card-body">
+            <h2 class="text-xl font-semibold mb-4">Edit Your Complaint</h2>
+
+            <form asp-action="EditComplaint" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="StudentId" />
+                <input type="hidden" asp-for="Status" />
+                <input type="hidden" asp-for="DateTime" />
+
+                <div class="form-control mb-4">
+                    <label class="label" asp-for="Title">
+                        <span class="label-text">Title of complaint</span>
+                    </label>
+                    <input asp-for="Title" type="text" class="input input-bordered" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-control mb-4">
+                    <label class="label" asp-for="Category">
+                        <span class="label-text">Category</span>
+                    </label>
+                    <select asp-for="Category" class="select select-bordered"
+                            asp-items="Html.GetEnumSelectList<Categories>()">
+                        <option value="">-- Select Category --</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+
+                <div class="form-control mb-4">
+                    <label class="label" asp-for="Content">
+                        <span class="label-text">Description</span>
+                    </label>
+                    <textarea asp-for="Content" class="textarea textarea-bordered"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="form-control mb-4">
+                    <label class="cursor-pointer label">
+                        <input type="checkbox" class="checkbox mr-2" required />
+                        <span class="label-text">
+                            I accept the terms<br />
+                            <a href="#" class="link link-primary text-sm">Read our T&Cs</a>
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-success w-fit">Update Complaint</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
