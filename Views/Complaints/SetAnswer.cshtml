@@ -1,79 +1,75 @@
-﻿<!DOCTYPE html>
-<html lang="en" data-theme="light">
+@using SCMM.Data
+@model SCMM.Models.SupportTicket
+@{
+    ViewData["Title"] = "Set Answer";
+}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Set Answer (Employee)</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#000000', // black for titles like first page
-                        success: '#00B26F'  // green from first page
-                    }
-                }
-            }
-        }
-    </script>
-</head>
+<div class="max-w-6xl mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Complaint Section -->
+    <div class="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
+        <h2 class="text-xl font-semibold text-primary mb-4">The Complaint Content</h2>
 
-<body class="bg-white text-gray-800">
-
-   
-    <!-- Main Content -->
-    <div class="max-w-6xl mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- Complaint Section -->
-        <div class="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
-            <h2 class="text-xl font-semibold text-primary mb-4">The Complaint Content</h2>
-
-            <div class="form-control mb-4">
-                <label class="label">
-                    <span class="label-text text-gray-900 font-medium">Title of Complaint</span>
-                </label>
-                <input type="text" class="input input-bordered bg-white" value="Course Content Not Updated" disabled />
-            </div>
-
-            <div class="form-control mb-4">
-                <label class="label">
-                    <span class="label-text text-gray-900 font-medium">Category</span>
-                </label>
-                <select class="select select-bordered bg-white" disabled>
-                    <option selected>Courses</option>
-                </select>
-            </div>
-
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text text-gray-900 font-medium">Description</span>
-                </label>
-                <textarea class="textarea textarea-bordered bg-white h-32" disabled>
-I enrolled in the Web Development course, but the materials are outdated and do not cover the latest technologies like React 18 or modern CSS. I would like to know if there are any updates planned or if I can switch to another course.
-                </textarea>
-            </div>
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text text-gray-900 font-medium">Title of Complaint</span>
+            </label>
+            <input type="text" class="input input-bordered bg-white" value="@Model.Title" disabled />
         </div>
 
-        <!-- Set Answer Section -->
-        <div class="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold text-primary">Set Answer</h2>
-                <input type="checkbox" class="checkbox checkbox-success" checked />
-            </div>
-
-            <div class="form-control mb-4">
-                <textarea class="textarea textarea-bordered bg-white h-40"
-                          placeholder="Write your answer here..."></textarea>
-            </div>
-
-            <button class="btn btn-success w-fit">Submit</button>
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text text-gray-900 font-medium">Category</span>
+            </label>
+            <input type="text" class="input input-bordered bg-white" value="@Model.Category" disabled />
         </div>
 
+        <div class="form-control">
+            <label class="label">
+                <span class="label-text text-gray-900 font-medium">Description</span>
+            </label>
+            <textarea class="textarea textarea-bordered bg-white h-32" disabled>@Model.Content</textarea>
+        </div>
     </div>
 
-</body>
+    <!-- Set Answer Section -->
+    <div class="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
+        <form asp-action="SetAnswer" method="post">
+            <input type="hidden" asp-for="Id" />
 
-</html>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-primary">Set Answer</h2>
+                <div class="form-control">
+                    <label class="cursor-pointer label">
+                        <input type="checkbox" asp-for="Status" class="checkbox checkbox-success"
+                               checked="@(Model.Status == Complaints_status.Answered)" />
+                        <span class="label-text ml-2">Mark as Answered</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-control mb-4">
+                <textarea asp-for="Answer" class="textarea textarea-bordered bg-white h-40"
+                          placeholder="Write your answer here..." required minlength="10"></textarea>
+                <span asp-validation-for="Answer" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success w-fit">Submit Answer</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Client-side validation for minimum length
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const answerTextarea = document.querySelector('textarea[name="Answer"]');
+            if (answerTextarea.value.trim().length < 10) {
+                e.preventDefault();
+                alert('Answer must be at least 10 characters long');
+            }
+        });
+    </script>
+}
